@@ -308,9 +308,9 @@
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-gray-300 mb-1">Admin Password</label>
-                    <input type="password" id="admin-pass-input" required placeholder="Default password: new2026"
+                    <input type="password" id="admin-pass-input" required placeholder="******************"
                         class="w-full bg-studio-base text-sm text-white px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400">
-                    <p class="text-[10px] text-gray-500 mt-1">Preset demo key: <code class="text-cyan-400 font-mono">admin</code></p>
+                    <p class="text-[10px] text-gray-500 mt-1">Preset demo key: <code class="text-cyan-400 font-mono">|||||||</code></p>
                 </div>
 
                 <div id="login-error-msg" class="hidden p-2.5 rounded-xl bg-red-950/60 border border-red-800/60 text-red-300 text-xs text-center">
@@ -1182,7 +1182,7 @@ export default async function handler(req, res) {
             const pass = document.getElementById('admin-pass-input').value;
             const errorMsg = document.getElementById('login-error-msg');
 
-            if (pass === 'admin') {
+            if (pass === 'new2026') {
                 appState.isAdminLoggedIn = true;
                 sessionStorage.setItem('cg_admin_auth', 'true');
                 errorMsg.classList.add('hidden');
