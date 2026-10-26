@@ -106,7 +106,7 @@
                 <!-- Search Input -->
                 <div class="relative w-full">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                    <input type="text" id="global-search" oninput="handleGlobalSearch(this.value)" placeholder="Search graphics, switchers, CCU, playout..." 
+                    <input type="text" id="global-search" oninput="handleGlobalSearch(this.value)" placeholder="Search graphics, switchers, sound, CCU..." 
                         class="w-full bg-studio-base/80 text-sm text-gray-200 pl-10 pr-4 py-2 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition">
                 </div>
             </div>
@@ -140,7 +140,7 @@
             <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- VIEW 1: HOME PAGE (8 Course Cards) -->
+        <!-- VIEW 1: HOME PAGE (9 Course Cards) -->
         <section id="view-home" class="space-y-10">
             <!-- Hero Banner -->
             <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-studio-card via-studio-base to-indigo-950/40 border border-studio-border p-6 sm:p-10">
@@ -153,11 +153,11 @@
                         Master Studio <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">CG & Production</span> Workflows
                     </h2>
                     <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
-                        Explore dedicated video modules for live TV graphics, video switchers, camera control units, playout automation, and broadcast animation pipelines.
+                        Explore dedicated video modules for live TV graphics, audio console engineering, video switchers, camera control units, playout automation, and broadcast animation pipelines.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#courses-grid" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-sm transition shadow-lg shadow-cyan-500/25 flex items-center gap-2">
-                            <i class="fa-solid fa-play"></i> Browse 8 Modules
+                            <i class="fa-solid fa-play"></i> Browse Modules
                         </a>
                         <button onclick="openModal('blueprint-modal')" class="px-5 py-2.5 rounded-xl bg-studio-border/60 hover:bg-studio-border text-white font-medium text-sm transition border border-studio-border">
                             Deployment Spec
@@ -166,18 +166,27 @@
                 </div>
             </div>
 
-            <!-- 8 Main Course Category Cards Grid -->
+            <!-- Main Course Category Cards Grid & Admin Category Manager -->
             <div>
-                <div class="flex justify-between items-end mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
                     <div>
                         <h3 class="text-xl font-bold text-white tracking-wide font-tech">ACADEMY TRAINING COURSES</h3>
                         <p class="text-xs text-gray-400">Select a course module to access video tutorials and media assets</p>
                     </div>
-                    <span class="text-xs text-cyan-400 font-mono bg-cyan-950/50 border border-cyan-800/50 px-3 py-1 rounded-full">8 Active Modules</span>
+                    <div class="flex items-center gap-3">
+                        <span id="active-modules-count" class="text-xs text-cyan-400 font-mono bg-cyan-950/50 border border-cyan-800/50 px-3 py-1 rounded-full"></span>
+                        <!-- Admin Manage Parts Button -->
+                        <div id="admin-category-actions" class="hidden">
+                            <button onclick="openModal('category-manager-modal')" class="px-3.5 py-1.5 bg-purple-600/30 hover:bg-purple-600/50 text-purple-300 border border-purple-500/50 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-lg shadow-purple-500/10">
+                                <i class="fa-solid fa-folder-plus text-cyan-400"></i>
+                                <span>+ Add / Manage Parts</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="courses-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Dynamic rendering of 8 Course Cards from JS -->
+                    <!-- Dynamic rendering of Course Cards from JS -->
                 </div>
             </div>
         </section>
@@ -293,13 +302,13 @@
                     <i class="fa-solid fa-lock"></i>
                 </div>
                 <h3 class="text-xl font-bold text-white font-tech">ADMIN DASHBOARD ACCESS</h3>
-                <p class="text-xs text-gray-400">Enter administrator password to manage video uploads across all 8 courses.</p>
+                <p class="text-xs text-gray-400">Enter administrator password to manage video uploads across all 9 courses.</p>
             </div>
 
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-gray-300 mb-1">Admin Password</label>
-                    <input type="password" id="admin-pass-input" required placeholder="Default password: admin"
+                    <input type="password" id="admin-pass-input" required placeholder="Default password: new2026"
                         class="w-full bg-studio-base text-sm text-white px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400">
                     <p class="text-[10px] text-gray-500 mt-1">Preset demo key: <code class="text-cyan-400 font-mono">admin</code></p>
                 </div>
@@ -333,16 +342,9 @@
 
                 <!-- Select Target Course Module -->
                 <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">Target Course Section (1 of 8)</label>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Target Course Section / Part</label>
                     <select id="upload-course-select" required class="w-full bg-studio-base text-sm text-gray-200 px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
-                        <option value="cg">1. CG (Computer Graphics)</option>
-                        <option value="playout">2. Play Out</option>
-                        <option value="mixer">3. Mixer (Vision & Audio Switchers)</option>
-                        <option value="create">4. Create (Graphics & Content Creation)</option>
-                        <option value="ccu">5. CCU (Camera Control Unit)</option>
-                        <option value="producer">6. Producer (PCR & Control Room)</option>
-                        <option value="autodesk">7. Autodesk (3ds Max, Maya, Flame)</option>
-                        <option value="other">8. Other Courses</option>
+                        <!-- Options populated dynamically from categories list -->
                     </select>
                 </div>
 
@@ -350,7 +352,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-medium text-gray-300 mb-1">Video Title</label>
-                        <input type="text" id="upload-title" required placeholder="e.g., Vizrt Engine Lower Thirds Setup"
+                        <input type="text" id="upload-title" required placeholder="e.g., Dante Audio Networking & Multicast Configuration"
                             class="w-full bg-studio-base text-sm text-gray-200 px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
                     </div>
                     <div>
@@ -469,8 +471,8 @@ export default async function handler(req, res) {
                         <li>In Vercel Dashboard, navigate to <strong>Storage</strong> &rarr; <strong>Create Vercel Blob Database</strong>.</li>
                         <li>Add Environment Variables in Vercel settings:
                             <ul class="list-disc pl-5 mt-1 text-gray-400">
-                                ><code class="text-cyan-300">BLOB_READ_WRITE_TOKEN</code> (Auto-linked by Vercel)</li>
-                                ><code class="text-cyan-300">ADMIN_PASSWORD</code> (Set your production admin password)</li>
+                                <li><code class="text-cyan-300">BLOB_READ_WRITE_TOKEN</code> (Auto-linked by Vercel)</li>
+                                <li><code class="text-cyan-300">ADMIN_PASSWORD</code> (Set your production admin password)</li>
                             </ul>
                         </li>
                         <li>Click <strong>Deploy</strong>. Your public training platform will be live globally on Vercel CDN.</li>
@@ -480,12 +482,83 @@ export default async function handler(req, res) {
         </div>
     </div>
 
+    <!-- NEW MODAL 5: ADMIN CATEGORY / PART MANAGER MODAL -->
+    <div id="category-manager-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-studio-card border border-studio-border w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
+            <div class="p-4 border-b border-studio-border flex justify-between items-center bg-studio-base/80">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-purple-400"></i>
+                    <h3 class="text-base font-bold text-white font-tech">Manage Academy Course Parts</h3>
+                </div>
+                <button onclick="closeModal('category-manager-modal')" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-studio-border transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Form to Add New Category -->
+                <form onsubmit="handleAddCategory(event)" class="bg-studio-base/90 p-4 rounded-xl border border-purple-500/30 space-y-3">
+                    <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus-circle"></i> Create New Module / Part
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-300 mb-1">Part Name</label>
+                            <input type="text" id="new-cat-title" required placeholder="e.g. Lighting, Sound, Master Control"
+                                class="w-full bg-studio-card text-xs text-white px-3 py-2 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-300 mb-1">Badge Tag</label>
+                            <input type="text" id="new-cat-badge" placeholder="e.g. DMX / LED Studio Lighting"
+                                class="w-full bg-studio-card text-xs text-white px-3 py-2 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-300 mb-1">Icon (FontAwesome Class)</label>
+                            <select id="new-cat-icon" class="w-full bg-studio-card text-xs text-white px-3 py-2 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
+                                <option value="fa-solid fa-lightbulb">💡 Lightbulb (Lighting)</option>
+                                <option value="fa-solid fa-music">🎵 Sound / Audio</option>
+                                <option value="fa-solid fa-clapperboard">🎬 Studio Directing</option>
+                                <option value="fa-solid fa-satellite-dish">📡 Satellite Uplink</option>
+                                <option value="fa-solid fa-sliders">🎛️ Audio Console</option>
+                                <option value="fa-solid fa-tv">📺 TV Monitor Wall</option>
+                                <option value="fa-solid fa-vr-cardboard">🥽 Virtual Reality Studio</option>
+                                <option value="fa-solid fa-wrench">🔧 Engineering Maintenance</option>
+                                <option value="fa-solid fa-folder">📁 Generic Part</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-300 mb-1">Description</label>
+                            <input type="text" id="new-cat-desc" placeholder="Brief outline of this part's workflow"
+                                class="w-full bg-studio-card text-xs text-white px-3 py-2 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Save New Part
+                    </button>
+                </form>
+
+                <!-- List of Existing Categories with Delete capability -->
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex justify-between items-center">
+                        <span>Active Parts List</span>
+                        <span id="cat-count-badge" class="text-[10px] text-purple-300 bg-purple-950 px-2 py-0.5 rounded-full border border-purple-800"></span>
+                    </h4>
+                    <div id="category-manager-list" class="space-y-2">
+                        <!-- Dynamic rendering of editable/deletable category items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT APPLICATION ENGINE -->
     <script>
         /* ==========================================================================
-           1. INITIAL DATA & CONFIGURATION (8 BROADCAST COURSES)
+           1. INITIAL DATA & CONFIGURATION (DEFAULT BROADCAST COURSES)
            ========================================================================== */
-        const COURSE_DEFINITIONS = [
+        const DEFAULT_COURSE_DEFINITIONS = [
             {
                 id: 'cg',
                 title: 'CG (Computer Graphics)',
@@ -493,7 +566,8 @@ export default async function handler(req, res) {
                 badge: 'Vizrt / Ross XPression',
                 color: 'from-cyan-500/20 to-blue-600/20',
                 borderColor: 'border-cyan-500/40',
-                desc: 'Real-time lower thirds, ticker channels, 3D broadcast virtual graphics, and data-driven election graphics.'
+                desc: 'Real-time lower thirds, ticker channels, 3D broadcast virtual graphics, and data-driven election graphics.',
+                isCustom: false
             },
             {
                 id: 'playout',
@@ -502,7 +576,8 @@ export default async function handler(req, res) {
                 badge: 'Automation & Master Control',
                 color: 'from-emerald-500/20 to-teal-600/20',
                 borderColor: 'border-emerald-500/40',
-                desc: 'Master control room (MCR) automation, playlist scheduling, media ingestion, and redundant channel playout.'
+                desc: 'Master control room (MCR) automation, playlist scheduling, media ingestion, and redundant channel playout.',
+                isCustom: false
             },
             {
                 id: 'mixer',
@@ -511,7 +586,8 @@ export default async function handler(req, res) {
                 badge: 'Vision & Audio Mixers',
                 color: 'from-purple-500/20 to-indigo-600/20',
                 borderColor: 'border-purple-500/40',
-                desc: 'Vision switchers (Grass Valley, Sony, ATEM), ME buses, keyers, frame syncs, and digital audio consoles.'
+                desc: 'Vision switchers (Grass Valley, Sony, ATEM), ME buses, keyers, frame syncs, and digital audio consoles.',
+                isCustom: false
             },
             {
                 id: 'create',
@@ -520,7 +596,8 @@ export default async function handler(req, res) {
                 badge: 'Graphics & Content Creation',
                 color: 'from-pink-500/20 to-rose-600/20',
                 borderColor: 'border-pink-500/40',
-                desc: 'Newsroom graphic templates, virtual studio design, motion graphics assets, and promo creation workflows.'
+                desc: 'Newsroom graphic templates, virtual studio design, motion graphics assets, and promo creation workflows.',
+                isCustom: false
             },
             {
                 id: 'ccu',
@@ -529,7 +606,8 @@ export default async function handler(req, res) {
                 badge: 'Sony / Panasonic CCUs',
                 color: 'from-amber-500/20 to-orange-600/20',
                 borderColor: 'border-amber-500/40',
-                desc: 'Camera control units, white balance calibration, iris control, fiber connectivity, and RCP shading.'
+                desc: 'Camera control units, white balance calibration, iris control, fiber connectivity, and RCP shading.',
+                isCustom: false
             },
             {
                 id: 'producer',
@@ -538,7 +616,8 @@ export default async function handler(req, res) {
                 badge: 'PCR & Gallery Control',
                 color: 'from-red-500/20 to-pink-600/20',
                 borderColor: 'border-red-500/40',
-                desc: 'Production Control Room (PCR) directing, talkback/intercom matrix routing, rundown timing, and breaking news.'
+                desc: 'Production Control Room (PCR) directing, talkback/intercom matrix routing, rundown timing, and breaking news.',
+                isCustom: false
             },
             {
                 id: 'autodesk',
@@ -547,7 +626,8 @@ export default async function handler(req, res) {
                 badge: '3ds Max / Maya / Flame',
                 color: 'from-indigo-500/20 to-purple-600/20',
                 borderColor: 'border-indigo-500/40',
-                desc: 'Broadcast 3D openers, channel branding packages, VFX compositing, and real-time element export.'
+                desc: 'Broadcast 3D openers, channel branding packages, VFX compositing, and real-time element export.',
+                isCustom: false
             },
             {
                 id: 'other',
@@ -556,9 +636,13 @@ export default async function handler(req, res) {
                 badge: 'ST 2110 / NDI / Engineering',
                 color: 'from-gray-500/20 to-slate-600/20',
                 borderColor: 'border-gray-500/40',
-                desc: 'SMPTE ST 2110 IP video networks, NDI routing, broadcast engineering fundamentals, and satellite uplink.'
+                desc: 'SMPTE ST 2110 IP video networks, NDI routing, broadcast engineering fundamentals, and satellite uplink.',
+                isCustom: false
             }
         ];
+
+        // Dynamic categories state array
+        let courseCategories = [...DEFAULT_COURSE_DEFINITIONS];
 
         // Sample Pre-populated Videos for immediate out-of-the-box demonstration
         const DEFAULT_VIDEOS = [
@@ -631,14 +715,35 @@ export default async function handler(req, res) {
 
         // Initialize App on DOM Ready
         window.onload = function() {
+            loadCategoriesFromStorage();
             loadVideosFromStorage();
             checkAdminSession();
             renderHeaderAuthBadge();
             renderCoursesGrid();
+            populateCourseSelectDropdown();
             
             // Default sorting check: Newest first logic enforced across storage
             sortVideosNewestFirst();
         };
+
+        // Category storage helpers
+        function loadCategoriesFromStorage() {
+            const storedCats = localStorage.getItem('cg_academy_categories');
+            if (storedCats) {
+                try {
+                    courseCategories = JSON.parse(storedCats);
+                } catch(e) {
+                    courseCategories = [...DEFAULT_COURSE_DEFINITIONS];
+                }
+            } else {
+                courseCategories = [...DEFAULT_COURSE_DEFINITIONS];
+                saveCategoriesToStorage();
+            }
+        }
+
+        function saveCategoriesToStorage() {
+            localStorage.setItem('cg_academy_categories', JSON.stringify(courseCategories));
+        }
 
         // Storage helpers
         function loadVideosFromStorage() {
@@ -664,14 +769,11 @@ export default async function handler(req, res) {
             appState.isAdminLoggedIn = (adminToken === 'true');
         }
 
-        // Automatic Newest-First Sorting Engine (Rule #4 requirement)
         function sortVideosNewestFirst() {
             appState.videos.sort((a, b) => {
-                // Primary: Date comparison (Newest top)
                 const dateA = new Date(a.date);
                 const dateB = new Date(b.date);
                 if (dateB - dateA !== 0) return dateB - dateA;
-                // Secondary fallback ID comparison
                 return b.id.localeCompare(a.id);
             });
         }
@@ -683,7 +785,6 @@ export default async function handler(req, res) {
             appState.currentView = view;
             appState.selectedCourseId = courseId;
 
-            // Hide search view if open
             document.getElementById('search-view').classList.add('hidden');
             document.getElementById('global-search').value = '';
 
@@ -705,10 +806,12 @@ export default async function handler(req, res) {
 
         function renderHeaderAuthBadge() {
             const area = document.getElementById('admin-badge-area');
+            const catActions = document.getElementById('admin-category-actions');
+
             if (appState.isAdminLoggedIn) {
                 area.innerHTML = `
                     <div class="flex items-center gap-2">
-                        <button onclick="openModal('upload-modal')" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-xs rounded-xl shadow-md transition flex items-center gap-1.5">
+                        <button onclick="openUploadModalForCurrentCourse()" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-xs rounded-xl shadow-md transition flex items-center gap-1.5">
                             <i class="fa-solid fa-plus"></i> Upload Media
                         </button>
                         <button onclick="handleAdminLogout()" class="px-3 py-1.5 bg-red-950/60 hover:bg-red-900/80 text-red-300 border border-red-800/60 font-medium text-xs rounded-xl transition flex items-center gap-1.5" title="Logout Admin">
@@ -716,6 +819,7 @@ export default async function handler(req, res) {
                         </button>
                     </div>
                 `;
+                if (catActions) catActions.classList.remove('hidden');
             } else {
                 area.innerHTML = `
                     <button onclick="openModal('login-modal')" class="px-3.5 py-2 bg-studio-card hover:bg-studio-border text-gray-200 border border-studio-border font-medium text-xs rounded-xl transition flex items-center gap-2">
@@ -723,9 +827,9 @@ export default async function handler(req, res) {
                         <span>Admin Login</span>
                     </button>
                 `;
+                if (catActions) catActions.classList.add('hidden');
             }
 
-            // Update course action buttons
             const courseAdminActions = document.getElementById('course-admin-actions');
             if (courseAdminActions) {
                 if (appState.isAdminLoggedIn && appState.currentView === 'course') {
@@ -736,22 +840,41 @@ export default async function handler(req, res) {
             }
         }
 
+        function populateCourseSelectDropdown() {
+            const select = document.getElementById('upload-course-select');
+            if (!select) return;
+            select.innerHTML = '';
+
+            courseCategories.forEach((cat, idx) => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = `${idx + 1}. ${cat.title} ${cat.isCustom ? '(Custom)' : ''}`;
+                select.appendChild(opt);
+            });
+        }
+
         function renderCoursesGrid() {
             const grid = document.getElementById('courses-grid');
             grid.innerHTML = '';
 
-            COURSE_DEFINITIONS.forEach(course => {
-                // Count items specifically in this course
+            document.getElementById('active-modules-count').innerText = `${courseCategories.length} Active Modules`;
+
+            courseCategories.forEach(course => {
                 const count = appState.videos.filter(v => v.courseId === course.id).length;
 
                 const card = document.createElement('div');
-                card.className = `glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group`;
+                card.className = `glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group relative overflow-hidden`;
                 card.onclick = () => navigateTo('course', course.id);
 
+                const customBadgeHtml = course.isCustom ? `
+                    <span class="absolute top-2 right-2 text-[9px] font-mono text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded-full border border-purple-800">Custom Part</span>
+                ` : '';
+
                 card.innerHTML = `
+                    ${customBadgeHtml}
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} border ${course.borderColor} flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${course.color || 'from-indigo-500/20 to-purple-600/20'} border ${course.borderColor || 'border-indigo-500/40'} flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
                                 <i class="${course.icon}"></i>
                             </div>
                             <span class="px-2.5 py-1 rounded-full text-[11px] font-mono bg-studio-base border border-studio-border text-cyan-400 font-semibold">
@@ -762,9 +885,9 @@ export default async function handler(req, res) {
                         <h4 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors font-tech mb-1">
                             ${course.title}
                         </h4>
-                        <p class="text-[11px] text-cyan-400 font-mono mb-3">${course.badge}</p>
+                        <p class="text-[11px] text-cyan-400 font-mono mb-3">${course.badge || 'Module'}</p>
                         <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-6">
-                            ${course.desc}
+                            ${course.desc || 'Broadcast training videos and operational guidelines.'}
                         </p>
                     </div>
 
@@ -778,18 +901,15 @@ export default async function handler(req, res) {
         }
 
         function renderCourseDetailView(courseId) {
-            const courseDef = COURSE_DEFINITIONS.find(c => c.id === courseId);
+            const courseDef = courseCategories.find(c => c.id === courseId);
             if (!courseDef) return;
 
-            // Set Header Details
             document.getElementById('course-header-title').innerText = courseDef.title;
             document.getElementById('course-header-desc').innerText = courseDef.desc;
             document.getElementById('course-header-icon').innerHTML = `<i class="${courseDef.icon} text-2xl"></i>`;
 
-            // Admin button display check
             renderHeaderAuthBadge();
 
-            // Filter videos belonging ONLY to this course (Rule #2 requirement: no leakage across courses)
             sortVideosNewestFirst();
             const courseVideos = appState.videos.filter(v => v.courseId === courseId);
 
@@ -884,7 +1004,6 @@ export default async function handler(req, res) {
                 return;
             }
 
-            // Filter across all videos
             const results = appState.videos.filter(v => 
                 v.title.toLowerCase().includes(appState.searchQuery) ||
                 v.description.toLowerCase().includes(appState.searchQuery) ||
@@ -912,10 +1031,14 @@ export default async function handler(req, res) {
         }
 
         /* ==========================================================================
-           5. MODALS ENGINE (PLAYER, LOGIN, UPLOAD, BLUEPRINT)
+           5. MODALS ENGINE & DYNAMIC CATEGORY MANAGER
            ========================================================================== */
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
+
+            if (modalId === 'category-manager-modal') {
+                renderCategoryManagerList();
+            }
         }
 
         function closeModal(modalId) {
@@ -927,7 +1050,6 @@ export default async function handler(req, res) {
             }
         }
 
-        // Open Player Modal with selected video data
         function openPlayerModal(videoId) {
             const vid = appState.videos.find(v => v.id === videoId);
             if (!vid) return;
@@ -944,6 +1066,114 @@ export default async function handler(req, res) {
             openModal('player-modal');
         }
 
+        /* Category / Part Management Functions */
+        function renderCategoryManagerList() {
+            const list = document.getElementById('category-manager-list');
+            const badge = document.getElementById('cat-count-badge');
+            list.innerHTML = '';
+
+            badge.innerText = `${courseCategories.length} Total Parts`;
+
+            courseCategories.forEach(cat => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between bg-studio-card p-3 rounded-xl border border-studio-border text-xs";
+
+                const deleteBtnHtml = cat.isCustom ? `
+                    <button onclick="deleteCategory('${cat.id}')" class="text-red-400 hover:text-white hover:bg-red-900/50 p-1.5 rounded-lg transition" title="Delete Custom Category">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                ` : `<span class="text-[10px] text-gray-500 font-mono">System Default</span>`;
+
+                item.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-studio-base border border-studio-border flex items-center justify-center text-cyan-400">
+                            <i class="${cat.icon}"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-white flex items-center gap-2">
+                                ${cat.title}
+                                ${cat.isCustom ? '<span class="text-[9px] text-purple-400">(Custom)</span>' : ''}
+                            </h5>
+                            <p class="text-[10px] text-gray-400">${cat.badge || 'No badge'} • ID: <code class="text-cyan-400">${cat.id}</code></p>
+                        </div>
+                    </div>
+                    <div>
+                        ${deleteBtnHtml}
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function handleAddCategory(e) {
+            e.preventDefault();
+            if (!appState.isAdminLoggedIn) return;
+
+            const title = document.getElementById('new-cat-title').value.trim();
+            const badge = document.getElementById('new-cat-badge').value.trim() || 'Custom Training Module';
+            const icon = document.getElementById('new-cat-icon').value;
+            const desc = document.getElementById('new-cat-desc').value.trim() || 'Custom broadcast operations and video tutorials.';
+
+            // Generate clean ID from title
+            const id = 'part-' + title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+
+            // Check duplicate ID
+            if (courseCategories.some(c => c.id === id)) {
+                alert('A category with a similar name already exists!');
+                return;
+            }
+
+            const newCategory = {
+                id,
+                title,
+                icon,
+                badge,
+                color: 'from-purple-500/20 to-indigo-600/20',
+                borderColor: 'border-purple-500/40',
+                desc,
+                isCustom: true
+            };
+
+            courseCategories.push(newCategory);
+            saveCategoriesToStorage();
+            populateCourseSelectDropdown();
+            renderCoursesGrid();
+            renderCategoryManagerList();
+
+            // Clear inputs
+            document.getElementById('new-cat-title').value = '';
+            document.getElementById('new-cat-badge').value = '';
+            document.getElementById('new-cat-desc').value = '';
+
+            alert(`New Part "${title}" successfully added!`);
+        }
+
+        function deleteCategory(categoryId) {
+            if (!appState.isAdminLoggedIn) return;
+
+            const cat = courseCategories.find(c => c.id === categoryId);
+            if (!cat || !cat.isCustom) {
+                alert('Default system categories cannot be deleted.');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete the part "${cat.title}"? Associated videos will also be cleaned up.`)) {
+                courseCategories = courseCategories.filter(c => c.id !== categoryId);
+                // Clean up videos belonging to deleted category
+                appState.videos = appState.videos.filter(v => v.courseId !== categoryId);
+
+                saveCategoriesToStorage();
+                saveVideosToStorage();
+                populateCourseSelectDropdown();
+                renderCoursesGrid();
+                renderCategoryManagerList();
+
+                if (appState.currentView === 'course' && appState.selectedCourseId === categoryId) {
+                    navigateTo('home');
+                }
+            }
+        }
+
         /* ==========================================================================
            6. ADMIN OPERATIONS (AUTH, SAVE, EDIT, DELETE, AUTO-SORT)
            ========================================================================== */
@@ -952,7 +1182,6 @@ export default async function handler(req, res) {
             const pass = document.getElementById('admin-pass-input').value;
             const errorMsg = document.getElementById('login-error-msg');
 
-            // Default Admin Password Check
             if (pass === 'admin') {
                 appState.isAdminLoggedIn = true;
                 sessionStorage.setItem('cg_admin_auth', 'true');
@@ -960,6 +1189,7 @@ export default async function handler(req, res) {
                 closeModal('login-modal');
                 document.getElementById('admin-pass-input').value = '';
                 renderHeaderAuthBadge();
+                renderCoursesGrid();
                 if (appState.currentView === 'course') {
                     renderCourseDetailView(appState.selectedCourseId);
                 }
@@ -972,12 +1202,14 @@ export default async function handler(req, res) {
             appState.isAdminLoggedIn = false;
             sessionStorage.removeItem('cg_admin_auth');
             renderHeaderAuthBadge();
+            renderCoursesGrid();
             if (appState.currentView === 'course') {
                 renderCourseDetailView(appState.selectedCourseId);
             }
         }
 
         function openUploadModalForCurrentCourse() {
+            populateCourseSelectDropdown();
             document.getElementById('upload-modal-title').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-cyan-400"></i> Upload New Course Media`;
             document.getElementById('edit-content-id').value = '';
             document.getElementById('upload-title').value = '';
@@ -985,7 +1217,6 @@ export default async function handler(req, res) {
             document.getElementById('upload-video-url').value = '';
             document.getElementById('upload-thumb-url').value = '';
             
-            // Set today's date default
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('upload-date').value = today;
 
@@ -997,6 +1228,7 @@ export default async function handler(req, res) {
         }
 
         function openEditModal(videoId) {
+            populateCourseSelectDropdown();
             const vid = appState.videos.find(v => v.id === videoId);
             if (!vid) return;
 
@@ -1024,7 +1256,6 @@ export default async function handler(req, res) {
             const description = document.getElementById('upload-desc').value.trim();
 
             if (editId) {
-                // EDIT Existing Video
                 const idx = appState.videos.findIndex(v => v.id === editId);
                 if (idx !== -1) {
                     appState.videos[idx] = {
@@ -1038,7 +1269,6 @@ export default async function handler(req, res) {
                     };
                 }
             } else {
-                // NEW UPLOAD Insertion Rule #4: Newest items sort automatically to top
                 const newVideo = {
                     id: 'vid-' + Date.now(),
                     courseId,
@@ -1048,16 +1278,13 @@ export default async function handler(req, res) {
                     thumbUrl,
                     description
                 };
-                // Unshift to array start
                 appState.videos.unshift(newVideo);
             }
 
-            // Always enforce sorting across state
             sortVideosNewestFirst();
             saveVideosToStorage();
             closeModal('upload-modal');
 
-            // Re-render UI
             renderCoursesGrid();
             if (appState.currentView === 'course') {
                 renderCourseDetailView(appState.selectedCourseId || courseId);
