@@ -91,7 +91,7 @@
             <!-- Brand Logo -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
                 <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
-                    <i class="fa-solid font-tech text-xl">CG</i>
+                    <span class="font-tech text-xl font-bold">CG</span>
                 </div>
                 <div>
                     <h1 class="font-tech text-lg font-bold tracking-wider text-white flex items-center gap-2">
@@ -115,7 +115,7 @@
             <div class="flex items-center gap-3">
                 <button onclick="openModal('blueprint-modal')" class="hidden sm:flex items-center gap-2 text-xs font-medium bg-studio-border/50 hover:bg-studio-border text-cyan-300 px-3 py-2 rounded-xl border border-cyan-500/30 transition">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Vercel / GitHub Blueprint</span>
+                    <span>Deployment Spec</span>
                 </button>
 
                 <div id="admin-badge-area">
@@ -212,7 +212,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-xs font-mono text-gray-400 uppercase tracking-wider">Course Library (<span id="course-items-count">0</span>)</span>
                     <span class="text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
-                        <i class="fa-solid fa-arrow-down-short-wide text-2xl"></i> Sorted Newest First
+                        <i class="fa-solid fa-arrow-down-short-wide"></i> Sorted Newest First
                     </span>
                 </div>
 
@@ -239,7 +239,7 @@
                 <span>CG & Broadcast Academy Operations Hub &copy; 2026</span>
             </div>
             <div class="flex gap-6">
-                <a href="javascript:void(0)" onclick="openModal('blueprint-modal')" class="hover:text-cyan-400 transition">Vercel Blob Guide</a>
+                <a href="javascript:void(0)" onclick="openModal('blueprint-modal')" class="hover:text-cyan-400 transition">Deployment Spec</a>
                 <a href="javascript:void(0)" onclick="openModal('login-modal')" class="hover:text-cyan-400 transition">Admin Login</a>
             </div>
         </div>
@@ -248,7 +248,6 @@
     <!-- MODAL 1: VIDEO PLAYER MODAL -->
     <div id="player-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-studio-card border border-studio-border w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            <!-- Modal Header -->
             <div class="p-4 border-b border-studio-border flex justify-between items-center bg-studio-base/50">
                 <div class="flex items-center gap-2">
                     <span id="player-modal-badge" class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-cyan-950 text-cyan-400 border border-cyan-800">CG</span>
@@ -259,14 +258,11 @@
                 </button>
             </div>
 
-            <!-- Modal Content Body -->
             <div class="overflow-y-auto p-4 sm:p-6 space-y-4">
-                <!-- Media Player Box -->
                 <div class="relative bg-black rounded-xl overflow-hidden aspect-video border border-studio-border flex items-center justify-center group">
                     <video id="player-video-element" controls class="w-full h-full object-contain"></video>
                 </div>
 
-                <!-- Info Bar -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-400 bg-studio-base/60 p-3 rounded-xl border border-studio-border">
                     <div class="flex items-center gap-3">
                         <span><i class="fa-regular fa-calendar text-cyan-400 mr-1"></i> Published: <strong id="player-modal-date" class="text-gray-200">2026-03-20</strong></span>
@@ -274,7 +270,6 @@
                     </div>
                 </div>
 
-                <!-- Description -->
                 <div>
                     <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Lesson Description</h4>
                     <p id="player-modal-desc" class="text-sm text-gray-300 leading-relaxed bg-studio-base/30 p-4 rounded-xl border border-studio-border/50">
@@ -293,19 +288,23 @@
                     <i class="fa-solid fa-lock"></i>
                 </div>
                 <h3 class="text-xl font-bold text-white font-tech">ADMIN DASHBOARD ACCESS</h3>
-                <p class="text-xs text-gray-400">Enter administrator password to manage video uploads across all 8 courses.</p>
+                <p class="text-xs text-gray-400">Log in via Firebase Auth to manage and publish training videos.</p>
             </div>
 
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">Admin Password</label>
-                    <input type="password" id="admin-pass-input" required placeholder="Default password: admin"
-                        class="w-full bg-studio-base text-sm text-white px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400">
-                    <p class="text-[10px] text-gray-500 mt-1">Preset demo key: <code class="text-cyan-400 font-mono">admin</code></p>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Admin Email</label>
+                    <input type="email" id="admin-email-input" required placeholder="admin@media-learn.app"
+                        class="w-full bg-studio-base text-sm text-white px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Password</label>
+                    <input type="password" id="admin-pass-input" required placeholder="••••••••"
+                        class="w-full bg-studio-base text-sm text-white px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
                 </div>
 
                 <div id="login-error-msg" class="hidden p-2.5 rounded-xl bg-red-950/60 border border-red-800/60 text-red-300 text-xs text-center">
-                    Incorrect password. Please try again.
+                    Authentication failed. Please verify credentials.
                 </div>
 
                 <div class="flex gap-3">
@@ -331,7 +330,6 @@
             <form onsubmit="handleSaveContent(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
                 <input type="hidden" id="edit-content-id" value="">
 
-                <!-- Select Target Course Module -->
                 <div>
                     <label class="block text-xs font-medium text-gray-300 mb-1">Target Course Section (1 of 8)</label>
                     <select id="upload-course-select" required class="w-full bg-studio-base text-sm text-gray-200 px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400">
@@ -346,7 +344,6 @@
                     </select>
                 </div>
 
-                <!-- Title & Date -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-medium text-gray-300 mb-1">Video Title</label>
@@ -360,22 +357,16 @@
                     </div>
                 </div>
 
-                <!-- Video URL / Vercel Blob URL input -->
                 <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">
-                        Video Media Source URL / Vercel Blob
-                    </label>
-                    <div class="flex gap-2">
-                        <input type="url" id="upload-video-url" required placeholder="https://... or select test video URL"
-                            class="w-full bg-studio-base text-sm text-gray-200 px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 font-mono">
-                    </div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Video Media Source URL</label>
+                    <input type="url" id="upload-video-url" required placeholder="https://..."
+                        class="w-full bg-studio-base text-sm text-gray-200 px-4 py-2.5 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400 font-mono">
                     <div class="flex gap-2 mt-2">
-                        <button type="button" onclick="fillSampleVideo(1)" class="text-[11px] bg-studio-base border border-studio-border hover:border-cyan-400 text-gray-400 hover:text-cyan-300 px-2.5 py-1 rounded-lg">Sample Video 1 (MP4)</button>
-                        <button type="button" onclick="fillSampleVideo(2)" class="text-[11px] bg-studio-base border border-studio-border hover:border-cyan-400 text-gray-400 hover:text-cyan-300 px-2.5 py-1 rounded-lg">Sample Video 2 (Big Buck Bunny)</button>
+                        <button type="button" onclick="fillSampleVideo(1)" class="text-[11px] bg-studio-base border border-studio-border hover:border-cyan-400 text-gray-400 hover:text-cyan-300 px-2.5 py-1 rounded-lg">Sample MP4 1</button>
+                        <button type="button" onclick="fillSampleVideo(2)" class="text-[11px] bg-studio-base border border-studio-border hover:border-cyan-400 text-gray-400 hover:text-cyan-300 px-2.5 py-1 rounded-lg">Sample MP4 2</button>
                     </div>
                 </div>
 
-                <!-- Thumbnail URL -->
                 <div>
                     <label class="block text-xs font-medium text-gray-300 mb-1">Thumbnail / Cover Image URL</label>
                     <input type="url" id="upload-thumb-url" required placeholder="https://images.unsplash.com/..."
@@ -386,10 +377,9 @@
                     </div>
                 </div>
 
-                <!-- Description -->
                 <div>
                     <label class="block text-xs font-medium text-gray-300 mb-1">Course Description & Agenda</label>
-                    <textarea id="upload-desc" rows="3" required placeholder="Detail the lesson objectives, broadcast equipment used, and prerequisites..."
+                    <textarea id="upload-desc" rows="3" required placeholder="Detail lesson objectives..."
                         class="w-full bg-studio-base text-sm text-gray-200 p-4 rounded-xl border border-studio-border focus:outline-none focus:border-cyan-400"></textarea>
                 </div>
 
@@ -403,13 +393,13 @@
         </div>
     </div>
 
-    <!-- MODAL 4: ARCHITECTURE & DEPLOYMENT BLUEPRINT MODAL -->
+    <!-- MODAL 4: DEPLOYMENT BLUEPRINT MODAL -->
     <div id="blueprint-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-studio-card border border-studio-border w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[88vh]">
             <div class="p-4 border-b border-studio-border flex justify-between items-center bg-studio-base/80">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-server text-cyan-400"></i>
-                    <h3 class="text-base font-bold text-white font-tech">GitHub + Vercel + Vercel Blob Deployment Blueprint</h3>
+                    <h3 class="text-base font-bold text-white font-tech">Firebase + GitHub + Vercel Deployment Guide</h3>
                 </div>
                 <button onclick="closeModal('blueprint-modal')" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-studio-border transition">
                     <i class="fa-solid fa-xmark text-xl"></i>
@@ -417,382 +407,155 @@
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6 text-xs text-gray-300 leading-relaxed">
-                <!-- Step 1: Project Folder Structure -->
                 <div class="bg-studio-base/80 p-4 rounded-xl border border-studio-border space-y-2">
-                    <h4 class="text-cyan-400 font-bold uppercase tracking-wider text-xs">1. Project Repository Folder Structure</h4>
-                    <p class="text-gray-400">Organize your GitHub repository as follows for automatic Vercel serverless build:</p>
-                    <pre class="bg-black/80 p-3 rounded-lg border border-studio-border text-emerald-400 font-mono text-[11px] overflow-x-auto">
-my-broadcast-academy/
-├── api/
-│   ├── upload.js          # Vercel Serverless Endpoint for `@vercel/blob` uploads
-│   └── content.js         # API route to fetch/update video metadata
-├── index.html             # Frontend SPA (This document)
-├── vercel.json            # Deployment routing configuration
-└── package.json           # Dependencies (@vercel/blob, @vercel/kv)
-</pre>
+                    <h4 class="text-cyan-400 font-bold uppercase tracking-wider text-xs">1. Firebase Console Connection</h4>
+                    <p class="text-gray-400">Your application is connected to project <code class="text-cyan-300 font-mono">media-learn-academy</code> with Firestore and Authentication enabled.</p>
                 </div>
-
-                <!-- Step 2: Vercel Blob Serverless Code Snippet -->
                 <div class="bg-studio-base/80 p-4 rounded-xl border border-studio-border space-y-2">
-                    <h4 class="text-cyan-400 font-bold uppercase tracking-wider text-xs">2. Vercel Serverless Upload Handler (`api/upload.js`)</h4>
-                    <p class="text-gray-400">Use this serverless code in Vercel to store media directly in Vercel Blob storage safely with password checking:</p>
-                    <pre class="bg-black/80 p-3 rounded-lg border border-studio-border text-cyan-300 font-mono text-[11px] overflow-x-auto">
-import { put } from '@vercel/blob';
-
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  
-  // Verify Admin Auth Header
-  const authHeader = req.headers.authorization;
-  if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
-    return res.status(401).json({ error: 'Unauthorized admin access' });
-  }
-
-  const { filename, contentType } = req.query;
-  const blob = await put(filename, req, {
-    access: 'public',
-    contentType
-  });
-
-  return res.status(200).json(blob); // Returns { url: "https://...public.blob.vercel-storage.com/..." }
-}
-</pre>
-                </div>
-
-                <!-- Step 3: Deployment Checklist -->
-                <div class="bg-studio-base/80 p-4 rounded-xl border border-studio-border space-y-2">
-                    <h4 class="text-cyan-400 font-bold uppercase tracking-wider text-xs">3. GitHub to Vercel Publishing Workflow</h4>
+                    <h4 class="text-cyan-400 font-bold uppercase tracking-wider text-xs">2. Vercel Hosting Workflow</h4>
                     <ol class="list-decimal pl-5 space-y-1.5 text-gray-300">
-                        <li>Initialize Git: <code class="text-amber-300 font-mono">git init && git add . && git commit -m "Initial Broadcast Academy commit"</code></li>
-                        <li>Push code to your GitHub Repository.</li>
-                        <li>Log into <strong>Vercel.com</strong>, click <strong>Add New Project</strong>, and import your GitHub repo.</li>
-                        <li>In Vercel Dashboard, navigate to <strong>Storage</strong> &rarr; <strong>Create Vercel Blob Database</strong>.</li>
-                        <li>Add Environment Variables in Vercel settings:
-                            <ul class="list-disc pl-5 mt-1 text-gray-400">
-                                ><code class="text-cyan-300">BLOB_READ_WRITE_TOKEN</code> (Auto-linked by Vercel)</li>
-                                ><code class="text-cyan-300">ADMIN_PASSWORD</code> (Set your production admin password)</li>
-                            </ul>
-                        </li>
-                        <li>Click <strong>Deploy</strong>. Your public training platform will be live globally on Vercel CDN.</li>
+                        <li>Push your code changes to your GitHub repository.</li>
+                        <li>Log into <strong>Vercel.com</strong> and connect your repo to <code class="text-cyan-300 font-mono">media-learn.vercel.app</code>.</li>
+                        <li>Vercel automatically publishes updates globally on every git push.</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT APPLICATION ENGINE -->
+    <!-- FIREBASE SDK & APPLICATION ENGINE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAeOnre1F1qMtzCxCKb4EIWJrRbdZpB7X0",
+            authDomain: "media-learn-academy.firebaseapp.com",
+            projectId: "media-learn-academy",
+            storageBucket: "media-learn-academy.firebasestorage.app",
+            messagingSenderId: "227115477693",
+            appId: "1:227115477693:web:9cb6bbd6965b6fc32625d4",
+            measurementId: "G-26MP1JGVPC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        window.db = db;
+        window.auth = auth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.signOut = signOut;
+        window.collection = collection;
+        window.getDocs = getDocs;
+        window.addDoc = addDoc;
+        window.deleteDoc = deleteDoc;
+        window.doc = doc;
+
+        // Check Auth State on load
+        onAuthStateChanged(auth, (user) => {
+            window.currentUser = user;
+            renderAdminBadge();
+            if (currentView === 'course' && currentCourseId) {
+                renderCourseView(currentCourseId);
+            }
+        });
+
+        // Initial Load Data
+        loadVideosFromFirebase();
+    </script>
+
     <script>
-        /* ==========================================================================
-           1. INITIAL DATA & CONFIGURATION (8 BROADCAST COURSES)
-           ========================================================================== */
         const COURSE_DEFINITIONS = [
-            {
-                id: 'cg',
-                title: 'CG (Computer Graphics)',
-                icon: 'fa-solid fa-desktop',
-                badge: 'Vizrt / Ross XPression',
-                color: 'from-cyan-500/20 to-blue-600/20',
-                borderColor: 'border-cyan-500/40',
-                desc: 'Real-time lower thirds, ticker channels, 3D broadcast virtual graphics, and data-driven election graphics.'
-            },
-            {
-                id: 'playout',
-                title: 'Play Out',
-                icon: 'fa-solid fa-tower-broadcast',
-                badge: 'Automation & Master Control',
-                color: 'from-emerald-500/20 to-teal-600/20',
-                borderColor: 'border-emerald-500/40',
-                desc: 'Master control room (MCR) automation, playlist scheduling, media ingestion, and redundant channel playout.'
-            },
-            {
-                id: 'mixer',
-                title: 'Mixer',
-                icon: 'fa-solid fa-sliders',
-                badge: 'Vision & Audio Mixers',
-                color: 'from-purple-500/20 to-indigo-600/20',
-                borderColor: 'border-purple-500/40',
-                desc: 'Vision switchers (Grass Valley, Sony, ATEM), ME buses, keyers, frame syncs, and digital audio consoles.'
-            },
-            {
-                id: 'create',
-                title: 'Create',
-                icon: 'fa-solid fa-palette',
-                badge: 'Graphics & Content Creation',
-                color: 'from-pink-500/20 to-rose-600/20',
-                borderColor: 'border-pink-500/40',
-                desc: 'Newsroom graphic templates, virtual studio design, motion graphics assets, and promo creation workflows.'
-            },
-            {
-                id: 'ccu',
-                title: 'CCU (Camera Control)',
-                icon: 'fa-solid fa-video',
-                badge: 'Sony / Panasonic CCUs',
-                color: 'from-amber-500/20 to-orange-600/20',
-                borderColor: 'border-amber-500/40',
-                desc: 'Camera control units, white balance calibration, iris control, fiber connectivity, and RCP shading.'
-            },
-            {
-                id: 'producer',
-                title: 'Producer',
-                icon: 'fa-solid fa-headset',
-                badge: 'PCR & Gallery Control',
-                color: 'from-red-500/20 to-pink-600/20',
-                borderColor: 'border-red-500/40',
-                desc: 'Production Control Room (PCR) directing, talkback/intercom matrix routing, rundown timing, and breaking news.'
-            },
-            {
-                id: 'autodesk',
-                title: 'Autodesk',
-                icon: 'fa-solid fa-cube',
-                badge: '3ds Max / Maya / Flame',
-                color: 'from-indigo-500/20 to-purple-600/20',
-                borderColor: 'border-indigo-500/40',
-                desc: 'Broadcast 3D openers, channel branding packages, VFX compositing, and real-time element export.'
-            },
-            {
-                id: 'other',
-                title: 'Other Courses',
-                icon: 'fa-solid fa-network-wired',
-                badge: 'ST 2110 / NDI / Engineering',
-                color: 'from-gray-500/20 to-slate-600/20',
-                borderColor: 'border-gray-500/40',
-                desc: 'SMPTE ST 2110 IP video networks, NDI routing, broadcast engineering fundamentals, and satellite uplink.'
-            }
+            { id: 'cg', title: 'CG (Computer Graphics)', icon: 'fa-solid fa-desktop', badge: 'Vizrt / Ross XPression', color: 'from-cyan-500/20 to-blue-600/20', borderColor: 'border-cyan-500/40', desc: 'Real-time lower thirds, ticker channels, and 3D broadcast virtual graphics.' },
+            { id: 'playout', title: 'Play Out', icon: 'fa-solid fa-tower-broadcast', badge: 'Automation & Master Control', color: 'from-emerald-500/20 to-teal-600/20', borderColor: 'border-emerald-500/40', desc: 'Master control room automation, playlist scheduling, and media ingestion.' },
+            { id: 'mixer', title: 'Mixer', icon: 'fa-solid fa-sliders', badge: 'Vision & Audio Switchers', color: 'from-purple-500/20 to-indigo-600/20', borderColor: 'border-purple-500/40', desc: 'Vision switchers, ME buses, keyers, and digital audio consoles.' },
+            { id: 'create', title: 'Create', icon: 'fa-solid fa-palette', badge: 'Graphics Creation', color: 'from-pink-500/20 to-rose-600/20', borderColor: 'border-pink-500/40', desc: 'Newsroom graphic templates, virtual studio design, and motion pipelines.' },
+            { id: 'ccu', title: 'CCU', icon: 'fa-solid fa-camera', badge: 'Camera Control Unit', color: 'from-amber-500/20 to-orange-600/20', borderColor: 'border-amber-500/40', desc: 'Camera shading, color balancing, optical setup, and tally connections.' },
+            { id: 'producer', title: 'Producer', icon: 'fa-solid fa-clapperboard', badge: 'PCR Control Room', color: 'from-blue-500/20 to-cyan-600/20', borderColor: 'border-blue-500/40', desc: 'Live rundown management, director cues, and broadcast timing.' },
+            { id: 'autodesk', title: 'Autodesk', icon: 'fa-solid fa-cube', badge: '3ds Max, Maya, Flame', color: 'from-indigo-500/20 to-purple-600/20', borderColor: 'border-indigo-500/40', desc: '3D modeling, texturing, and rendering for broadcast branding.' },
+            { id: 'other', title: 'Other Courses', icon: 'fa-solid fa-graduation-cap', badge: 'Broadcast Engineering', color: 'from-gray-500/20 to-slate-600/20', borderColor: 'border-gray-500/40', desc: 'General transmission engineering and signal distribution.' }
         ];
 
-        // Sample Pre-populated Videos for immediate out-of-the-box demonstration
-        const DEFAULT_VIDEOS = [
-            {
-                id: 'vid-101',
-                courseId: 'cg',
-                title: 'Vizrt Artist: Building Real-time Lower Thirds with Data Fields',
-                description: 'Learn how to create dynamic lower third graphics linked to live control feeds using Vizrt Artist and Viz Engine.',
-                date: '2026-03-15',
-                thumbUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
-            },
-            {
-                id: 'vid-102',
-                courseId: 'cg',
-                title: 'XPression Graphics: 3D Animated Ticker Integration',
-                description: 'Step-by-step walkthrough of building a continuous 3D ticker in Ross XPression for live news channels.',
-                date: '2026-03-18',
-                thumbUrl: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
-            },
-            {
-                id: 'vid-201',
-                courseId: 'playout',
-                title: 'Master Control Automation & Secondary Event Triggers',
-                description: 'Configuring playout automation for automatic SCTE bug insertion, graphic overlay triggers, and server failovers.',
-                date: '2026-03-10',
-                thumbUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
-            },
-            {
-                id: 'vid-301',
-                courseId: 'mixer',
-                title: 'Grass Valley Kayenne: ME Bus Allocation & Chroma Keying',
-                description: 'Advanced vision mixing techniques on Grass Valley switcher frames including multi-layer chromakey setups.',
-                date: '2026-03-22',
-                thumbUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoylines.mp4'
-            },
-            {
-                id: 'vid-501',
-                courseId: 'ccu',
-                title: 'Sony HDCU-3100: Fiber Alignment & Paint Panel Calibration',
-                description: 'Complete guide to camera shading, master black levels, and optical fiber line test on Sony RCP 1500 panels.',
-                date: '2026-03-12',
-                thumbUrl: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
-            },
-            {
-                id: 'vid-701',
-                courseId: 'autodesk',
-                title: '3ds Max to Unreal Engine 5: Broadcast Asset Workflow',
-                description: 'Preparing 3D geometry and materials in 3ds Max for real-time virtual set rendering in Unreal Engine.',
-                date: '2026-03-19',
-                thumbUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
-            }
-        ];
+        let allVideos = [];
+        let currentView = 'home';
+        let currentCourseId = null;
 
-        /* ==========================================================================
-           2. APP STATE MANAGEMENT
-           ========================================================================== */
-        let appState = {
-            isAdminLoggedIn: false,
-            currentView: 'home', // 'home', 'course'
-            selectedCourseId: null,
-            videos: [],
-            searchQuery: ''
-        };
-
-        // Initialize App on DOM Ready
-        window.onload = function() {
-            loadVideosFromStorage();
-            checkAdminSession();
-            renderHeaderAuthBadge();
-            renderCoursesGrid();
-            
-            // Default sorting check: Newest first logic enforced across storage
-            sortVideosNewestFirst();
-        };
-
-        // Storage helpers
-        function loadVideosFromStorage() {
-            const stored = localStorage.getItem('cg_academy_videos');
-            if (stored) {
-                try {
-                    appState.videos = JSON.parse(stored);
-                } catch(e) {
-                    appState.videos = [...DEFAULT_VIDEOS];
-                }
-            } else {
-                appState.videos = [...DEFAULT_VIDEOS];
-                saveVideosToStorage();
+        async function loadVideosFromFirebase() {
+            try {
+                if (!window.db) return;
+                const querySnapshot = await window.getDocs(window.collection(window.db, "videos"));
+                allVideos = [];
+                querySnapshot.forEach((docSnap) => {
+                    allVideos.push({ firestoreId: docSnap.id, ...docSnap.data() });
+                });
+                renderHomeCourses();
+            } catch (err) {
+                console.error("Error loading Firestore videos:", err);
             }
         }
 
-        function saveVideosToStorage() {
-            localStorage.setItem('cg_academy_videos', JSON.stringify(appState.videos));
-        }
-
-        function checkAdminSession() {
-            const adminToken = sessionStorage.getItem('cg_admin_auth');
-            appState.isAdminLoggedIn = (adminToken === 'true');
-        }
-
-        // Automatic Newest-First Sorting Engine (Rule #4 requirement)
-        function sortVideosNewestFirst() {
-            appState.videos.sort((a, b) => {
-                // Primary: Date comparison (Newest top)
-                const dateA = new Date(a.date);
-                const dateB = new Date(b.date);
-                if (dateB - dateA !== 0) return dateB - dateA;
-                // Secondary fallback ID comparison
-                return b.id.localeCompare(a.id);
-            });
-        }
-
-        /* ==========================================================================
-           3. UI RENDER ENGINE & NAVIGATION
-           ========================================================================== */
-        function navigateTo(view, courseId = null) {
-            appState.currentView = view;
-            appState.selectedCourseId = courseId;
-
-            // Hide search view if open
-            document.getElementById('search-view').classList.add('hidden');
-            document.getElementById('global-search').value = '';
-
-            const homeView = document.getElementById('view-home');
-            const courseView = document.getElementById('view-course');
-
-            if (view === 'home') {
-                homeView.classList.remove('hidden');
-                courseView.classList.add('hidden');
-                renderCoursesGrid();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'course') {
-                homeView.classList.add('hidden');
-                courseView.classList.remove('hidden');
-                renderCourseDetailView(courseId);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function renderHeaderAuthBadge() {
-            const area = document.getElementById('admin-badge-area');
-            if (appState.isAdminLoggedIn) {
-                area.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <button onclick="openModal('upload-modal')" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-xs rounded-xl shadow-md transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-plus"></i> Upload Media
-                        </button>
-                        <button onclick="handleAdminLogout()" class="px-3 py-1.5 bg-red-950/60 hover:bg-red-900/80 text-red-300 border border-red-800/60 font-medium text-xs rounded-xl transition flex items-center gap-1.5" title="Logout Admin">
-                            <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Logout</span>
-                        </button>
-                    </div>
-                `;
-            } else {
-                area.innerHTML = `
-                    <button onclick="openModal('login-modal')" class="px-3.5 py-2 bg-studio-card hover:bg-studio-border text-gray-200 border border-studio-border font-medium text-xs rounded-xl transition flex items-center gap-2">
-                        <i class="fa-solid fa-user-gear text-cyan-400"></i>
-                        <span>Admin Login</span>
-                    </button>
-                `;
-            }
-
-            // Update course action buttons
-            const courseAdminActions = document.getElementById('course-admin-actions');
-            if (courseAdminActions) {
-                if (appState.isAdminLoggedIn && appState.currentView === 'course') {
-                    courseAdminActions.classList.remove('hidden');
-                } else {
-                    courseAdminActions.classList.add('hidden');
-                }
-            }
-        }
-
-        function renderCoursesGrid() {
+        function renderHomeCourses() {
             const grid = document.getElementById('courses-grid');
+            if (!grid) return;
             grid.innerHTML = '';
 
             COURSE_DEFINITIONS.forEach(course => {
-                // Count items specifically in this course
-                const count = appState.videos.filter(v => v.courseId === course.id).length;
-
-                const card = document.createElement('div');
-                card.className = `glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group`;
-                card.onclick = () => navigateTo('course', course.id);
-
-                card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} border ${course.borderColor} flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition-transform">
+                const count = allVideos.filter(v => v.courseId === course.id).length;
+                grid.innerHTML += `
+                    <div onclick="navigateToCourse('${course.id}')" class="glass-card rounded-2xl p-6 cursor-pointer flex flex-col justify-between border ${course.borderColor} group">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${course.color} border border-white/10 flex items-center justify-center text-cyan-400 text-xl group-hover:scale-110 transition">
                                 <i class="${course.icon}"></i>
                             </div>
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-mono bg-studio-base border border-studio-border text-cyan-400 font-semibold">
-                                ${count} ${count === 1 ? 'Video' : 'Videos'}
-                            </span>
+                            <div>
+                                <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-full border border-cyan-800/40">${course.badge}</span>
+                                <h4 class="text-base font-bold text-white mt-2 font-tech group-hover:text-cyan-300 transition">${course.title}</h4>
+                                <p class="text-xs text-gray-400 mt-1 line-clamp-2">${course.desc}</p>
+                            </div>
                         </div>
-
-                        <h4 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors font-tech mb-1">
-                            ${course.title}
-                        </h4>
-                        <p class="text-[11px] text-cyan-400 font-mono mb-3">${course.badge}</p>
-                        <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-6">
-                            ${course.desc}
-                        </p>
-                    </div>
-
-                    <div class="pt-4 border-t border-studio-border/60 flex items-center justify-between text-xs text-gray-300 group-hover:text-cyan-400 font-medium">
-                        <span>Open Module</span>
-                        <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                        <div class="mt-6 pt-4 border-t border-studio-border/60 flex items-center justify-between text-xs">
+                            <span class="text-gray-400 font-mono"><strong class="text-white">${count}</strong> Lessons</span>
+                            <span class="text-cyan-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">Open Module <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
                     </div>
                 `;
-                grid.appendChild(card);
             });
         }
 
-        function renderCourseDetailView(courseId) {
-            const courseDef = COURSE_DEFINITIONS.find(c => c.id === courseId);
-            if (!courseDef) return;
+        function navigateTo(view) {
+            currentView = view;
+            document.getElementById('search-view').classList.add('hidden');
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-course').classList.add('hidden');
 
-            // Set Header Details
-            document.getElementById('course-header-title').innerText = courseDef.title;
-            document.getElementById('course-header-desc').innerText = courseDef.desc;
-            document.getElementById('course-header-icon').innerHTML = `<i class="${courseDef.icon} text-2xl"></i>`;
+            if (view === 'home') {
+                document.getElementById('view-home').classList.remove('hidden');
+                renderHomeCourses();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            // Admin button display check
-            renderHeaderAuthBadge();
+        function navigateToCourse(courseId) {
+            currentView = 'course';
+            currentCourseId = courseId;
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('search-view').classList.add('hidden');
+            document.getElementById('view-course').classList.remove('hidden');
+            renderCourseView(courseId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            // Filter videos belonging ONLY to this course (Rule #2 requirement: no leakage across courses)
-            sortVideosNewestFirst();
-            const courseVideos = appState.videos.filter(v => v.courseId === courseId);
+        function renderCourseView(courseId) {
+            const course = COURSE_DEFINITIONS.find(c => c.id === courseId);
+            if (!course) return;
 
+            document.getElementById('course-header-icon').innerHTML = `<i class="${course.icon} text-xl"></i>`;
+            document.getElementById('course-header-title').innerText = course.title;
+            document.getElementById('course-header-desc').innerText = course.desc;
+
+            const courseVideos = allVideos.filter(v => v.courseId === courseId).sort((a,b) => new Date(b.date) - new Date(a.date));
             document.getElementById('course-items-count').innerText = courseVideos.length;
 
             const grid = document.getElementById('course-videos-grid');
@@ -801,297 +564,197 @@ export default async function handler(req, res) {
 
             if (courseVideos.length === 0) {
                 emptyState.classList.remove('hidden');
-                grid.classList.add('hidden');
             } else {
                 emptyState.classList.add('hidden');
-                grid.classList.remove('hidden');
-
-                courseVideos.forEach((vid, index) => {
-                    const videoCard = createVideoCardElement(vid, index === 0);
-                    grid.appendChild(videoCard);
+                courseVideos.forEach(vid => {
+                    grid.innerHTML += `
+                        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                            <div>
+                                <div class="relative aspect-video bg-black overflow-hidden cursor-pointer" onclick='openPlayerModal(${JSON.stringify(vid)})'>
+                                    <img src="${vid.thumbUrl}" alt="${vid.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                                        <div class="w-12 h-12 rounded-full bg-cyan-500 text-black flex items-center justify-center shadow-lg shadow-cyan-500/50 text-lg">
+                                            <i class="fa-solid fa-play ml-0.5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-5 space-y-2">
+                                    <div class="flex items-center justify-between text-[11px] text-gray-400 font-mono">
+                                        <span><i class="fa-regular fa-calendar text-cyan-400 mr-1"></i> ${vid.date}</span>
+                                        <span class="text-purple-400">${vid.firestoreId ? '#' + vid.firestoreId.slice(0,6) : '#vid'}</span>
+                                    </div>
+                                    <h4 class="text-base font-bold text-white line-clamp-1">${vid.title}</h4>
+                                    <p class="text-xs text-gray-400 line-clamp-2">${vid.desc}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0 flex items-center justify-between">
+                                <button onclick='openPlayerModal(${JSON.stringify(vid)})' class="px-4 py-2 rounded-xl bg-studio-border/60 hover:bg-studio-border text-cyan-300 text-xs font-medium transition">
+                                    <i class="fa-solid fa-play mr-1"></i> Watch Lesson
+                                </button>
+                                ${window.currentUser ? `<button onclick="deleteVideo('${vid.firestoreId}')" class="text-red-400 hover:text-red-300 text-xs p-2"><i class="fa-solid fa-trash"></i></button>` : ''}
+                            </div>
+                        </div>
+                    `;
                 });
+            }
+
+            const adminActions = document.getElementById('course-admin-actions');
+            if (window.currentUser) {
+                adminActions.classList.remove('hidden');
+            } else {
+                adminActions.classList.add('hidden');
             }
         }
 
-        function createVideoCardElement(vid, isNewest = false) {
-            const card = document.createElement('div');
-            card.className = "bg-studio-card border border-studio-border hover:border-cyan-500/50 rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between transition duration-300 group";
-
-            const adminControlsHtml = appState.isAdminLoggedIn ? `
-                <div class="absolute top-3 right-3 z-20 flex gap-1.5 bg-black/80 backdrop-blur-md p-1 rounded-xl border border-white/10 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onclick="event.stopPropagation(); openEditModal('${vid.id}')" class="p-1.5 text-xs text-cyan-300 hover:text-white hover:bg-cyan-600/50 rounded-lg transition" title="Edit Video">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button onclick="event.stopPropagation(); deleteVideo('${vid.id}')" class="p-1.5 text-xs text-red-400 hover:text-white hover:bg-red-600/50 rounded-lg transition" title="Delete Video">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            ` : '';
-
-            const newestBadgeHtml = isNewest ? `
-                <span class="absolute top-3 left-3 z-20 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-cyan-500 text-black shadow-md uppercase tracking-wider">
-                    NEWEST UPLOAD
-                </span>
-            ` : '';
-
-            card.innerHTML = `
-                <div class="relative aspect-video bg-black cursor-pointer overflow-hidden" onclick="openPlayerModal('${vid.id}')">
-                    ${newestBadgeHtml}
-                    ${adminControlsHtml}
-                    <img src="${vid.thumbUrl}" alt="${vid.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x450/121721/00f0ff?text=Broadcast+Video'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-center justify-center">
-                        <div class="w-12 h-12 rounded-full bg-cyan-500/90 text-black flex items-center justify-center text-lg shadow-xl group-hover:scale-110 transition transform">
-                            <i class="fa-solid fa-play ml-1"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-5 flex-grow flex flex-col justify-between space-y-3">
-                    <div>
-                        <div class="flex justify-between items-center text-[11px] text-gray-400 font-mono mb-1.5">
-                            <span><i class="fa-regular fa-calendar text-cyan-400 mr-1"></i> ${vid.date}</span>
-                            <span class="text-purple-400 uppercase font-semibold">ID: #${vid.id.slice(-4)}</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-white group-hover:text-cyan-300 transition line-clamp-2 leading-snug cursor-pointer" onclick="openPlayerModal('${vid.id}')">
-                            ${vid.title}
-                        </h4>
-                        <p class="text-xs text-gray-400 line-clamp-2 mt-2 leading-relaxed">
-                            ${vid.description}
-                        </p>
-                    </div>
-
-                    <div class="pt-3 border-t border-studio-border/60 flex items-center justify-between">
-                        <button onclick="openPlayerModal('${vid.id}')" class="text-xs text-cyan-400 font-semibold hover:underline flex items-center gap-1">
-                            <span>Watch Tutorial</span>
-                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-            return card;
-        }
-
-        /* ==========================================================================
-           4. GLOBAL SEARCH FUNCTIONALITY
-           ========================================================================== */
         function handleGlobalSearch(query) {
-            appState.searchQuery = query.trim().toLowerCase();
             const searchView = document.getElementById('search-view');
-            const searchGrid = document.getElementById('search-results-grid');
+            const homeView = document.getElementById('view-home');
+            const courseView = document.getElementById('view-course');
 
-            if (appState.searchQuery === '') {
+            if (!query || query.trim() === '') {
                 searchView.classList.add('hidden');
+                if (currentView === 'home') homeView.classList.remove('hidden');
+                if (currentView === 'course') courseView.classList.remove('hidden');
                 return;
             }
 
-            // Filter across all videos
-            const results = appState.videos.filter(v => 
-                v.title.toLowerCase().includes(appState.searchQuery) ||
-                v.description.toLowerCase().includes(appState.searchQuery) ||
-                v.courseId.toLowerCase().includes(appState.searchQuery)
-            );
-
-            document.getElementById('search-count').innerText = `(${results.length} found)`;
-            searchGrid.innerHTML = '';
-
-            if (results.length === 0) {
-                searchGrid.innerHTML = `<p class="col-span-full text-sm text-gray-400 italic">No matching training videos found.</p>`;
-            } else {
-                results.forEach(vid => {
-                    const card = createVideoCardElement(vid);
-                    searchGrid.appendChild(card);
-                });
-            }
-
+            homeView.classList.add('hidden');
+            courseView.classList.add('hidden');
             searchView.classList.remove('hidden');
+
+            const q = query.toLowerCase();
+            const results = allVideos.filter(v => v.title.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q));
+            document.getElementById('search-count').innerText = `(${results.length} found)`;
+
+            const grid = document.getElementById('search-results-grid');
+            grid.innerHTML = '';
+            results.forEach(vid => {
+                grid.innerHTML += `
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                        <div class="relative aspect-video bg-black overflow-hidden cursor-pointer" onclick='openPlayerModal(${JSON.stringify(vid)})'>
+                            <img src="${vid.thumbUrl}" alt="${vid.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h4 class="text-base font-bold text-white line-clamp-1">${vid.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2">${vid.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
         function clearSearch() {
             document.getElementById('global-search').value = '';
-            document.getElementById('search-view').classList.add('hidden');
+            handleGlobalSearch('');
         }
 
-        /* ==========================================================================
-           5. MODALS ENGINE (PLAYER, LOGIN, UPLOAD, BLUEPRINT)
-           ========================================================================== */
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-            if (modalId === 'player-modal') {
-                const vidPlayer = document.getElementById('player-video-element');
-                vidPlayer.pause();
-                vidPlayer.src = "";
-            }
-        }
-
-        // Open Player Modal with selected video data
-        function openPlayerModal(videoId) {
-            const vid = appState.videos.find(v => v.id === videoId);
-            if (!vid) return;
-
+        function openPlayerModal(vid) {
             document.getElementById('player-modal-title').innerText = vid.title;
             document.getElementById('player-modal-date').innerText = vid.date;
-            document.getElementById('player-modal-id').innerText = '#' + vid.id;
-            document.getElementById('player-modal-desc').innerText = vid.description;
-            document.getElementById('player-modal-badge').innerText = vid.courseId.toUpperCase();
-
-            const player = document.getElementById('player-video-element');
-            player.src = vid.videoUrl;
-
+            document.getElementById('player-modal-id').innerText = '#' + (vid.firestoreId ? vid.firestoreId.slice(0,6) : 'vid');
+            document.getElementById('player-modal-desc').innerText = vid.desc;
+            document.getElementById('player-video-element').src = vid.videoUrl;
             openModal('player-modal');
         }
 
-        /* ==========================================================================
-           6. ADMIN OPERATIONS (AUTH, SAVE, EDIT, DELETE, AUTO-SORT)
-           ========================================================================== */
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const pass = document.getElementById('admin-pass-input').value;
-            const errorMsg = document.getElementById('login-error-msg');
-
-            // Default Admin Password Check
-            if (pass === 'admin') {
-                appState.isAdminLoggedIn = true;
-                sessionStorage.setItem('cg_admin_auth', 'true');
-                errorMsg.classList.add('hidden');
-                closeModal('login-modal');
-                document.getElementById('admin-pass-input').value = '';
-                renderHeaderAuthBadge();
-                if (appState.currentView === 'course') {
-                    renderCourseDetailView(appState.selectedCourseId);
-                }
-            } else {
-                errorMsg.classList.remove('hidden');
-            }
-        }
-
-        function handleAdminLogout() {
-            appState.isAdminLoggedIn = false;
-            sessionStorage.removeItem('cg_admin_auth');
-            renderHeaderAuthBadge();
-            if (appState.currentView === 'course') {
-                renderCourseDetailView(appState.selectedCourseId);
-            }
-        }
-
         function openUploadModalForCurrentCourse() {
-            document.getElementById('upload-modal-title').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-cyan-400"></i> Upload New Course Media`;
-            document.getElementById('edit-content-id').value = '';
-            document.getElementById('upload-title').value = '';
-            document.getElementById('upload-desc').value = '';
-            document.getElementById('upload-video-url').value = '';
-            document.getElementById('upload-thumb-url').value = '';
-            
-            // Set today's date default
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('upload-date').value = today;
-
-            if (appState.selectedCourseId) {
-                document.getElementById('upload-course-select').value = appState.selectedCourseId;
+            if (currentCourseId) {
+                document.getElementById('upload-course-select').value = currentCourseId;
             }
-
+            document.getElementById('upload-date').valueAsDate = new Date();
             openModal('upload-modal');
         }
 
-        function openEditModal(videoId) {
-            const vid = appState.videos.find(v => v.id === videoId);
-            if (!vid) return;
-
-            document.getElementById('upload-modal-title').innerHTML = `<i class="fa-solid fa-pen text-cyan-400"></i> Edit Course Content`;
-            document.getElementById('edit-content-id').value = vid.id;
-            document.getElementById('upload-course-select').value = vid.courseId;
-            document.getElementById('upload-title').value = vid.title;
-            document.getElementById('upload-date').value = vid.date;
-            document.getElementById('upload-video-url').value = vid.videoUrl;
-            document.getElementById('upload-thumb-url').value = vid.thumbUrl;
-            document.getElementById('upload-desc').value = vid.description;
-
-            openModal('upload-modal');
-        }
-
-        function handleSaveContent(e) {
+        async function handleAdminLogin(e) {
             e.preventDefault();
-
-            const editId = document.getElementById('edit-content-id').value;
-            const courseId = document.getElementById('upload-course-select').value;
-            const title = document.getElementById('upload-title').value.trim();
-            const date = document.getElementById('upload-date').value;
-            const videoUrl = document.getElementById('upload-video-url').value.trim();
-            const thumbUrl = document.getElementById('upload-thumb-url').value.trim();
-            const description = document.getElementById('upload-desc').value.trim();
-
-            if (editId) {
-                // EDIT Existing Video
-                const idx = appState.videos.findIndex(v => v.id === editId);
-                if (idx !== -1) {
-                    appState.videos[idx] = {
-                        id: editId,
-                        courseId,
-                        title,
-                        date,
-                        videoUrl,
-                        thumbUrl,
-                        description
-                    };
-                }
-            } else {
-                // NEW UPLOAD Insertion Rule #4: Newest items sort automatically to top
-                const newVideo = {
-                    id: 'vid-' + Date.now(),
-                    courseId,
-                    title,
-                    date,
-                    videoUrl,
-                    thumbUrl,
-                    description
-                };
-                // Unshift to array start
-                appState.videos.unshift(newVideo);
-            }
-
-            // Always enforce sorting across state
-            sortVideosNewestFirst();
-            saveVideosToStorage();
-            closeModal('upload-modal');
-
-            // Re-render UI
-            renderCoursesGrid();
-            if (appState.currentView === 'course') {
-                renderCourseDetailView(appState.selectedCourseId || courseId);
-            } else {
-                navigateTo('course', courseId);
+            const email = document.getElementById('admin-email-input').value;
+            const pass = document.getElementById('admin-pass-input').value;
+            try {
+                await window.signInWithEmailAndPassword(window.auth, email, pass);
+                closeModal('login-modal');
+                document.getElementById('login-error-msg').classList.add('hidden');
+                loadVideosFromFirebase();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('login-error-msg').classList.remove('hidden');
             }
         }
 
-        function deleteVideo(videoId) {
-            if (confirm('Are you sure you want to delete this broadcast training video?')) {
-                appState.videos = appState.videos.filter(v => v.id !== videoId);
-                saveVideosToStorage();
-                renderCoursesGrid();
-                if (appState.currentView === 'course') {
-                    renderCourseDetailView(appState.selectedCourseId);
-                }
+        async function handleAdminLogout() {
+            await window.signOut(window.auth);
+            renderAdminBadge();
+            if (currentView === 'course') renderCourseView(currentCourseId);
+        }
+
+        function renderAdminBadge() {
+            const area = document.getElementById('admin-badge-area');
+            if (window.currentUser) {
+                area.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <button onclick="openUploadModalForCurrentCourse()" class="bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Upload
+                        </button>
+                        <button onclick="handleAdminLogout()" class="bg-studio-border hover:bg-studio-hover text-red-400 text-xs font-medium px-3 py-2 rounded-xl transition" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                area.innerHTML = `
+                    <button onclick="openModal('login-modal')" class="bg-studio-border/50 hover:bg-studio-border text-gray-300 hover:text-cyan-400 text-xs font-medium px-3 py-2 rounded-xl border border-studio-border transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock text-cyan-400"></i> Admin
+                    </button>
+                `;
             }
         }
 
-        /* Helper Input Presets for fast testing */
-        function fillSampleVideo(num) {
-            if (num === 1) {
-                document.getElementById('upload-video-url').value = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
-            } else {
-                document.getElementById('upload-video-url').value = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+        async function handleSaveContent(e) {
+            e.preventDefault();
+            const newVid = {
+                courseId: document.getElementById('upload-course-select').value,
+                title: document.getElementById('upload-title').value,
+                date: document.getElementById('upload-date').value,
+                videoUrl: document.getElementById('upload-video-url').value,
+                thumbUrl: document.getElementById('upload-thumb-url').value,
+                desc: document.getElementById('upload-desc').value
+            };
+
+            try {
+                await window.addDoc(window.collection(window.db, "videos"), newVid);
+                closeModal('upload-modal');
+                e.target.reset();
+                await loadVideosFromFirebase();
+                if (currentView === 'course') renderCourseView(currentCourseId);
+            } catch (err) {
+                console.error("Error adding document: ", err);
+                alert("Failed to save video to Firestore.");
             }
+        }
+
+        async function deleteVideo(firestoreId) {
+            if (!confirm("Are you sure you want to delete this training video?")) return;
+            try {
+                await window.deleteDoc(window.doc(window.db, "videos", firestoreId));
+                await loadVideosFromFirebase();
+                if (currentView === 'course') renderCourseView(currentCourseId);
+            } catch (err) {
+                console.error("Error deleting document: ", err);
+            }
+        }
+
+        function fillSampleVideo(type) {
+            const urlInput = document.getElementById('upload-video-url');
+            if (type === 1) urlInput.value = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+            if (type === 2) urlInput.value = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
         }
 
         function fillSampleThumb(type) {
-            if (type === 'studio') {
-                document.getElementById('upload-thumb-url').value = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80';
-            } else {
-                document.getElementById('upload-thumb-url').value = 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80';
-            }
+            const thumbInput = document.getElementById('upload-thumb-url');
+            if (type === 'studio') thumbInput.value = "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800&auto=format&fit=crop";
+            if (type === 'graphics') thumbInput.value = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop";
         }
     </script>
 </body>
